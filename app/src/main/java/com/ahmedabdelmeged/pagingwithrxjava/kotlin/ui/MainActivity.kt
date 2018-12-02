@@ -45,17 +45,17 @@ class MainActivity : AppCompatActivity() {
      */
     private fun initSwipeToRefresh() {
         usersViewModel.getRefreshState().observe(this, Observer { networkState ->
-            if (userAdapter.currentList != null) {
-                if (userAdapter.currentList!!.size > 0) {
-                    usersSwipeRefreshLayout.isRefreshing = networkState?.status == NetworkState.LOADING.status
-                } else {
-                    setInitialLoadingState(networkState)
-                }
+            if (userAdapter.currentList == null) {
+                setInitialLoadingState(networkState)
+                return@Observer
+            }
+            if (userAdapter.currentList!!.size > 0) {
+                usersSwipeRefreshLayout.isRefreshing = networkState?.status == NetworkState.LOADING.status
             } else {
                 setInitialLoadingState(networkState)
             }
         })
-        usersSwipeRefreshLayout.setOnRefreshListener({ usersViewModel.refresh() })
+        usersSwipeRefreshLayout.setOnRefreshListener{ usersViewModel.refresh() }
     }
 
     /**

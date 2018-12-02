@@ -45,10 +45,10 @@ class UsersViewModel : ViewModel() {
     }
 
     fun getNetworkState(): LiveData<NetworkState> = Transformations.switchMap<UsersDataSource, NetworkState>(
-            sourceFactory.usersDataSourceLiveData, { it.networkState })
+            sourceFactory.usersDataSourceLiveData) { it.networkState }
 
     fun getRefreshState(): LiveData<NetworkState> = Transformations.switchMap<UsersDataSource, NetworkState>(
-            sourceFactory.usersDataSourceLiveData, { it.initialLoad })
+            sourceFactory.usersDataSourceLiveData) { it.initialLoad }
 
     override fun onCleared() {
         super.onCleared()
