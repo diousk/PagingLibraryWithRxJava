@@ -55,7 +55,7 @@ public class UsersDataSource extends ItemKeyedDataSource<Long, User> {
         // very first list is loaded.
         networkState.postValue(NetworkState.LOADING);
         initialLoad.postValue(NetworkState.LOADING);
-
+        Timber.d("loadInitial : params " + params.requestedInitialKey+ ", req size: " + params.requestedLoadSize);
         //get the initial users from the api
         compositeDisposable.add(githubService.getUsers(1, params.requestedLoadSize).subscribe(users -> {
                     // clear retry since last request succeeded
@@ -79,6 +79,7 @@ public class UsersDataSource extends ItemKeyedDataSource<Long, User> {
         // set network value to loading.
         networkState.postValue(NetworkState.LOADING);
 
+        Timber.d("loadAfter : params " + params.key + ", req size: " + params.requestedLoadSize);
         //get the users from the api after id
         compositeDisposable.add(githubService.getUsers(params.key, params.requestedLoadSize).subscribe(users -> {
                     // clear retry since last request succeeded

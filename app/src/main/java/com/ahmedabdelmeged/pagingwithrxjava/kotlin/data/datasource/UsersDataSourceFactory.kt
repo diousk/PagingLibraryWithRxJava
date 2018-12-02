@@ -15,7 +15,7 @@ import io.reactivex.disposables.CompositeDisposable
  */
 class UsersDataSourceFactory(private val compositeDisposable: CompositeDisposable,
                              private val githubService: GithubService)
-    : DataSource.Factory<Long, User> {
+    : DataSource.Factory<Long, User>() {
 
     val usersDataSourceLiveData = MutableLiveData<UsersDataSource>()
 

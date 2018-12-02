@@ -11,6 +11,9 @@ import com.ahmedabdelmeged.pagingwithrxjava.java.data.NetworkState;
 import com.ahmedabdelmeged.pagingwithrxjava.java.model.User;
 
 import java.util.Objects;
+import java.util.Timer;
+
+import timber.log.Timber;
 
 /**
  * Created by Ahmed Abd-Elmeged on 2/16/2018.
@@ -41,6 +44,11 @@ public class UserAdapter extends PagedListAdapter<User, RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (getItemViewType(position) == R.layout.item_user) {
+            Timber.d("onBindViewHolder : " + position + ", id: " + getItem(position).getId());
+        } else {
+            Timber.d("item_network_state: " + networkState);
+        }
         switch (getItemViewType(position)) {
             case R.layout.item_user:
                 ((UserViewHolder) holder).bindTo(getItem(position));

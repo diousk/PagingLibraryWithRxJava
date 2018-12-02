@@ -15,7 +15,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * This allows us to channel its network request status etc back to the UI. See the Listing creation
  * in the Repository class.
  */
-public class UsersDataSourceFactory implements DataSource.Factory<Long, User> {
+public class UsersDataSourceFactory extends DataSource.Factory<Long, User> {
 
     private CompositeDisposable compositeDisposable;
 
